@@ -139,9 +139,8 @@ Alternatif yang dapat diterapkan, dengan menggunakan endpoint yang lebih spesifi
 
 ## API Publik
 Untuk mencoba API ini dapat mengunjungi tautan berikut:
-```
-https://alifmaulidanar.my.id/api-bbm/
-```
+https://alifmaulidanar.my.id/api-bbm
+
 
 ## Kredit
 Developer [isibens.in](https://isibens.in/) : [Adham Somantrie](https://adha.ms/)
