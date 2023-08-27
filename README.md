@@ -139,7 +139,7 @@ Alternatif yang dapat diterapkan, dengan menggunakan endpoint yang lebih spesifi
 
 ## API Publik
 Untuk mencoba API ini dapat mengunjungi tautan berikut:
-https://alifmaulidanar.my.id/api-bbm
+https://api.alifmaulidanar.my.id/api-bbm
 
 
 ## Kredit
