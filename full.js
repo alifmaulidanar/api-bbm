@@ -39,18 +39,27 @@ router.get("/full", async (req, res) => {
     const dieselData = processData(dieselTableColumns);
 
     const formattedData = {
-      bensin: formatData(brands, rons, gasolineData),
-      diesel: formatData(dieselBrands, dieselRons, dieselData),
-      update: updateText,
-      source: source,
-      sourceCredits: sourceCredits,
-      scraperCredits: scraperCredits,
+      status: "success",
+      message: "Berhasil menampilkan data seluruh BBM.",
+      data: {
+        bensin: formatData(brands, rons, gasolineData),
+        diesel: formatData(dieselBrands, dieselRons, dieselData),
+        update: updateText,
+        source: source,
+        sourceCredits: sourceCredits,
+        scraperCredits: scraperCredits,
+      },
     };
 
-    res.json(formattedData);
+    res.status(200).json(formattedData);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Terjadi kesalahan");
+    res.status(500).json({
+      status: "error",
+      error: error,
+      message: "Terjadi kesalahan pada server.",
+      data: null,
+    });
   }
 });
 

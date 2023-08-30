@@ -1,36 +1,41 @@
 # RESTful API BBM Jakarta (Jabodetabek)
 
-RESTful API ini dibuat dengan bergantung kepada website [isibens.in](https://isibens.in/) yang bertujuan untuk mempermudah dalam mendapatkan data harga bahan bakar minyak terkini, khususnya untuk wilayah Jabodetabek.
+hargaBensin merupakan RESTful API yang dibuat dengan bergantung kepada website [isibens.in](https://isibens.in/). Tujuannya adalah untuk mempermudah siapa saja yang membutuhkan informasi harga bahan bakar minyak (BBM) terkini, khususnya untuk wilayah Jabodetabek, untuk pengembangan aplikasinya.
 
 ## Endpoints
+
 Pengguna dapat mengakses data seluruh informasi BBM dalam satu endpoint. Kurang efektif dalam digunakan, tetapi telah mencakup seluruh data yang diperlukan.
+
 ```
 /api-bbm/full
 ```
 
 Alternatif yang dapat diterapkan, dengan menggunakan endpoint yang lebih spesifik untuk satu jenis produk.
+
 ```
 /api-bbm/{jenis}/{merek}/{oktan}
 ```
 
 ## Dokumentasi
 
-| Parameter |                               Penjelasan                               |
-| --------- | ---------------------------------------------------------------------- |
-| jenis     | Merupakan jenis dari BBM: `bensin` dan `diesel`.                       |
-| merek     | Merupakan merek produsen BBM: `Pertamina`, `Vivo`, `BP`, dan `Shell`.  |
-| oktan     | Merupakan besaran oktan BBM yang berbeda bagi bensin dan diesel.       |
-|           | Oktan untuk **bensin**: `90`, `92`, `95`, dan `98`.                    |
-|           | Oktan untuk **diesel**: `48`, `51`, dan `53`.                          |
+| Parameter | Penjelasan                                                            |
+| --------- | --------------------------------------------------------------------- |
+| jenis     | Merupakan jenis dari BBM: `bensin` dan `diesel`.                      |
+| merek     | Merupakan merek produsen BBM: `Pertamina`, `Vivo`, `BP`, dan `Shell`. |
+| oktan     | Merupakan besaran oktan BBM yang berbeda bagi bensin dan diesel.      |
+|           | Oktan untuk **bensin**: `90`, `92`, `95`, dan `98`.                   |
+|           | Oktan untuk **diesel**: `48`, `51`, dan `53`.                         |
 
 ## Contoh Penggunaan
 
 1. Mengambil `seluruh data BBM`.
+
    ```
    /api-bbm/full
    ```
 
    Maka, akan mendapatkan seluruh data BBM bensin dan diesel dari setiap merek dalam format JSON:
+
    ```
    {
     "bensin": {
@@ -88,12 +93,15 @@ Alternatif yang dapat diterapkan, dengan menggunakan endpoint yang lebih spesifi
       }
    }
    ```
+
 2. Mengambil data spesifik sebuah produk BBM. Misalnya, `Vivo Revvo95`
+
    ```
    /api-bbm/bensin/vivo/95
    ```
 
    Maka, akan mendapatkan data dari BBM `Vivo Revvo95`:
+
    ```
    {
     "brand": "Vivo",
@@ -112,12 +120,15 @@ Alternatif yang dapat diterapkan, dengan menggunakan endpoint yang lebih spesifi
       }
    }
    ```
+
 3. Contoh lain, mengambil data BBM untuk diesel. Misalnya, `Shell V-Power Diesel`
+
    ```
    /api-bbm/diesel/shell/51
    ```
 
    Maka, akan mendapatkan data dari BBM `Shell V-Power Diesel`:
+
    ```
    {
     "brand": "Shell",
@@ -138,9 +149,10 @@ Alternatif yang dapat diterapkan, dengan menggunakan endpoint yang lebih spesifi
    ```
 
 ## API Publik
+
 Untuk mencoba API ini dapat mengunjungi tautan berikut:
 https://api.alifmaulidanar.my.id/api-bbm
 
-
 ## Kredit
+
 Developer [isibens.in](https://isibens.in/) : [Adham Somantrie](https://adha.ms/)

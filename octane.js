@@ -42,49 +42,90 @@ router.get("/:jenis/:brand/:produk", async (req, res) => {
       const brandIndex = getBrandIndex(brand);
       const ronIndex = getRONIndex(produk);
 
-      if (brandIndex !== -1 && ronIndex !== -1) {
-        const data = gasolineTableColumns[brandIndex][ronIndex];
-        const { produk, harga } = parseData(data);
-        res.json({
-          brand: brands[brandIndex],
-          produk,
-          ron: rons[ronIndex],
-          harga,
-          update: updateText,
-          source: source,
-          sourceCredits: sourceCredits,
-          scraperCredits: scraperCredits,
-        });
+      if (brandIndex !== -1) {
+        if (ronIndex !== -1) {
+          const data = gasolineTableColumns[brandIndex][ronIndex];
+          const { produk, harga } = parseData(data);
+          res.status(200).json({
+            status: "success",
+            message: "Berhasil menampilkan data BBM.",
+            data: {
+              brand: brands[brandIndex],
+              produk,
+              ron: rons[ronIndex],
+              harga,
+              update: updateText,
+              source: source,
+              sourceCredits: sourceCredits,
+              scraperCredits: scraperCredits,
+            },
+          });
+        } else {
+          res.status(400).json({
+            status: "fail",
+            message: "Oktan BBM tidak valid.",
+            data: null,
+          });
+        }
       } else {
-        res.status(404).json({ error: "Data tidak ditemukan" });
+        res.status(400).json({
+          status: "fail",
+          message: "Merek BBM tidak valid.",
+          data: null,
+        });
       }
     } else if (jenis === "diesel") {
       const dieselTableColumns = getTableColumns($, tables[1]);
       const brandIndex = getDieselBrandIndex(brand);
       const ronIndex = getDieselRONIndex(produk);
 
-      if (brandIndex !== -1 && ronIndex !== -1) {
-        const data = dieselTableColumns[brandIndex][ronIndex];
-        const { produk, harga } = parseData(data);
-        res.json({
-          brand: dieselBrands[brandIndex],
-          produk,
-          cn: dieselRons[ronIndex],
-          harga,
-          update: updateText,
-          source: source,
-          sourceCredits: sourceCredits,
-          scraperCredits: scraperCredits,
-        });
+      if (brandIndex !== -1) {
+        if (ronIndex !== -1) {
+          const data = dieselTableColumns[brandIndex][ronIndex];
+          const { produk, harga } = parseData(data);
+          res.status(200).json({
+            status: "success",
+            message: "Berhasil mendapatkan data BBM.",
+            data: {
+              brand: dieselBrands[brandIndex],
+              produk,
+              cn: dieselRons[ronIndex],
+              harga,
+              update: updateText,
+              source: source,
+              sourceCredits: sourceCredits,
+              scraperCredits: scraperCredits,
+            },
+          });
+        } else {
+          res.status(400).json({
+            status: "fail",
+            message: "Oktan BBM tidak valid.",
+            data: null,
+          });
+        }
       } else {
-        res.status(404).json({ error: "Data tidak ditemukan" });
+        res.status(400).json({
+          status: "fail",
+          message: "Merek BBM tidak valid.",
+          data: null,
+        });
       }
     } else {
-      res.status(400).json({ error: "Jenis BBM tidak valid" });
+      res.status(400).json({
+        status: "fail",
+        message: "Jenis BBM tidak valid.",
+        data: null,
+      });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Terjadi kesalahan");
+    res.status(500).json({
+      status: "error",
+      error: error,
+      message: "Terjadi kesalahan pada server.",
+      data: null,
+    });
   }
 });
 

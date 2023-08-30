@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "hargaBensin — API BBM Jabodetabek",
+    "description": "hargaBensin merupakan RESTful API yang dibuat dengan bergantung kepada website https://isibens.in/. Tujuannya adalah untuk mempermudah siapa saja yang membutuhkan informasi harga bahan bakar minyak (BBM) terkini, khususnya untuk wilayah Jabodetabek, untuk pengembangan aplikasinya.",
+    "version": "1.0.0"
+  },
+  "_servers": [
+    {
+    "url": "http://localhost:3000",
+    "description": "localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Seluruh Harga BBM",
+      "description": "Menampilkan daftar harga BBM untuk seluruh jenis, merek, produk, dan oktan."
+    },
+    {
+      "name": "Daftar Harga BBM Spesifik",
+      "description": "Menampilkan daftar harga BBM dengan jenis, merek, produk, dan oktan tertentu."
+    }
+  ],
+  "paths": {
+    "/api-bbm/full": {
+      "get": {
+        "tags": ["Seluruh Harga BBM"],
+        "summary": "Seluruh harga BBM",
+        "description": "Endpoint ini akan menampilkan daftar harga BBM secara menyeluruh dari berbagai jenis, merek, produk, dan oktan yang terdapat pada website https://isibens.in/",
+        "responses": {
+          "200": {
+            "description": "Berhasil menampilkan seluruh informasi BBM."
+          },
+          "400": {
+            "description": "Permintaan tidak valid."
+          }
+        }
+      }
+    },
+    "/api-bbm/{jenis}/{merek}/{oktan}": {
+      "get": {
+        "tags": ["Daftar Harga BBM Spesifik"],
+        "summary": "Harga BBM spesifik berdasarkan jenis, merek, dan oktan",
+        "description": "Endpoint ini akan menampilkan harga BBM yang spesifik berdasarkan jenis, merek, dan oktan yang dikirimkan melalui parameter.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jenis",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Jenis BBM (bensin / diesel)"
+          },
+          {
+            "in": "path",
+            "name": "merek",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Merek produsen BBM (pertamina / vivo / bp / shell)"
+          },
+          {
+            "in": "path",
+            "name": "oktan",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Oktan BBM (bensin: 90, 92, 95, 98 / diesel: 48, 51, 53)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Berhasil menampilkan informasi BBM."
+          },
+          "400": {
+            "description": "Permintaan tidak valid."
+          }
+        }
+      }
+    }
+  }
+}
