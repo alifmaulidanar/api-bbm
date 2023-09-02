@@ -148,10 +148,10 @@ Alternatif yang dapat diterapkan, dengan menggunakan endpoint yang lebih spesifi
    }
    ```
 
-## API Publik
+## Demo API dengan SwaggerUI
 
 Untuk mencoba API ini dapat mengunjungi tautan berikut:
-https://api.alifmaulidanar.my.id/api-bbm
+https://api.alifmaulidanar.my.id/api-bbm/
 
 ## Kredit
 
