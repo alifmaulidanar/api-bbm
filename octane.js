@@ -37,29 +37,45 @@ router.get("/:jenis/:brand/:produk", async (req, res) => {
     const brand = req.params.brand;
     const produk = req.params.produk;
 
-    if (jenis === "bensin") {
+    if (jenis == "bensin") {
       const gasolineTableColumns = getTableColumns($, tables[0]);
       const brandIndex = getBrandIndex(brand);
       const ronIndex = getRONIndex(produk);
 
       if (brandIndex !== -1) {
         if (ronIndex !== -1) {
-          const data = gasolineTableColumns[brandIndex][ronIndex];
-          const { produk, harga } = parseData(data);
-          res.status(200).json({
-            status: "success",
-            message: "Berhasil menampilkan data BBM.",
-            data: {
-              brand: brands[brandIndex],
-              produk,
-              ron: rons[ronIndex],
-              harga,
-              update: updateText,
-              source: source,
-              sourceCredits: sourceCredits,
-              scraperCredits: scraperCredits,
-            },
-          });
+          if (
+            (brand == "vivo" && produk == "98") ||
+            (brand == "bp" && (produk == "90" || produk == "98")) ||
+            (brand == "shell" && produk == "90")
+          ) {
+            res.status(400).json({
+              status: "fail",
+              message:
+                brands[brandIndex] +
+                " tidak menyediakan BBM bensin dengan RON " +
+                rons[ronIndex] +
+                ".",
+              data: null,
+            });
+          } else {
+            const data = gasolineTableColumns[brandIndex][ronIndex];
+            const { produk, harga } = parseData(data);
+            res.status(200).json({
+              status: "success",
+              message: "Berhasil menampilkan data BBM.",
+              data: {
+                brand: brands[brandIndex],
+                produk,
+                ron: rons[ronIndex],
+                harga,
+                update: updateText,
+                source: source,
+                sourceCredits: sourceCredits,
+                scraperCredits: scraperCredits,
+              },
+            });
+          }
         } else {
           res.status(400).json({
             status: "fail",
@@ -81,22 +97,37 @@ router.get("/:jenis/:brand/:produk", async (req, res) => {
 
       if (brandIndex !== -1) {
         if (ronIndex !== -1) {
-          const data = dieselTableColumns[brandIndex][ronIndex];
-          const { produk, harga } = parseData(data);
-          res.status(200).json({
-            status: "success",
-            message: "Berhasil mendapatkan data BBM.",
-            data: {
-              brand: dieselBrands[brandIndex],
-              produk,
-              cn: dieselRons[ronIndex],
-              harga,
-              update: updateText,
-              source: source,
-              sourceCredits: sourceCredits,
-              scraperCredits: scraperCredits,
-            },
-          });
+          if (
+            (brand == "bp" && (produk == "51" || produk == "53")) ||
+            (brand == "shell" && (produk == "48" || produk == "53"))
+          ) {
+            res.status(400).json({
+              status: "fail",
+              message:
+                dieselBrands[brandIndex] +
+                " tidak menyediakan BBM diesel dengan CN " +
+                dieselRons[ronIndex] +
+                ".",
+              data: null,
+            });
+          } else {
+            const data = dieselTableColumns[brandIndex][ronIndex];
+            const { produk, harga } = parseData(data);
+            res.status(200).json({
+              status: "success",
+              message: "Berhasil mendapatkan data BBM.",
+              data: {
+                brand: dieselBrands[brandIndex],
+                produk,
+                cn: dieselRons[ronIndex],
+                harga,
+                update: updateText,
+                source: source,
+                sourceCredits: sourceCredits,
+                scraperCredits: scraperCredits,
+              },
+            });
+          }
         } else {
           res.status(400).json({
             status: "fail",

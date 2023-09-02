@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "hargaBensin — API BBM Jabodetabek",
-    "description": "hargaBensin merupakan RESTful API yang dibuat dengan bergantung kepada website https://isibens.in/. Tujuannya adalah untuk mempermudah siapa saja yang membutuhkan informasi harga bahan bakar minyak (BBM) terkini, khususnya untuk wilayah Jabodetabek, untuk pengembangan aplikasinya.",
+    "description": "hargaBensin merupakan RESTful API yang dibuat dengan bergantung kepada website https://isibens.in/. Tujuannya adalah untuk mempermudah siapa saja yang membutuhkan informasi harga bahan bakar minyak (BBM) terkini, khususnya untuk wilayah Jabodetabek, untuk pengembangan aplikasinya. Sangat disarankan untuk tetap mengacu kepada tabel di website isibens.in untuk mengetahui BBM apa saja yang tersedia dan dapat ditarik datanya.",
     "version": "1.0.0"
   },
   "_servers": [
